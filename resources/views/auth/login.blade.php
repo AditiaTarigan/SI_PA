@@ -13,15 +13,24 @@
         <div class="form-wrapper">
             <img src="{{ asset('foto/del.png') }}" alt="del">
             <h1>Institut Teknologi Del</h1>
-            <form action="" method="POST">
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                    @foreach ($errors->all() as $item)
+                        <li>{{ $item }}</li>
+                    @endforeach
+                    </ul>
+                </div>
+            @endif
+            <form action="{{ route('login') }}" method="POST">
                 @csrf
                 <div class="field">
-                    <input class="inp" type="username" value="" id="username" required autocomplete="off">
+                    <input class="inp" type="text" value="{{ old('username') }}" name="username" required autocomplete="off">
                     <label class="label" for="username">Username</label>
                     <span class="bi bi-person"></span>
                 </div>
                 <div class="field">
-                    <input class="inp" type="password" id="password" required>
+                    <input class="inp" type="password" name="password" id="password" required>
                     <label class="label" for="password">Password</label>
                     <span class="toggle-pass bi bi-eye"></span>
                 </div>
